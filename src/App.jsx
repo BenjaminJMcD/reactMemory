@@ -4,11 +4,10 @@ import Card from './Card'
 function App() {
 
   const [items, setItems] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
       const fetchData = async () => {
-          setIsLoading(true);
+
           const response1 = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
           const data1 = await response1.json()
           const response2 = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
@@ -28,14 +27,20 @@ function App() {
           const response9 = await fetch('https://pokeapi.co/api/v2/pokemon/kecleon')
           const data9 = await response9.json()
 
-          const combinedData = [data1, data2, data3, data4, data5, data6, data7, data8, data9]
+          const combinedData = [data1, data2, data3, data4, data5, data6, data7, data8, data9];
           setItems(combinedData)
       }
       fetchData();
       return () => {
-          setIsLoading(false);
       }
   }, []);
+
+
+  function handleClick() {
+    const itemsToShuffle = [...items];
+    const shuffledItems = itemsToShuffle.sort((a, b) => 0.5 - Math.random());
+    setItems(shuffledItems);
+  }
 
   return (
     <div>
@@ -43,8 +48,10 @@ function App() {
       <div className="cardContainer">
         {items.map((item) => (
           <Card
+            key = {item.id}
             image = {item.sprites.front_default}
             name = {item.name}
+            click = {handleClick}
           />
         ))}
       </div>

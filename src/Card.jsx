@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function Card({ image, name }) {
+function Card({ image, name, click }) {
 
     // ONCLICK FUNCTIONS --- FUNCTION MUST BE ON APP AND PASSED TO THIS SO THAT IT CAN JUMBLE THE ORDER OF ITEMS
 
@@ -9,7 +9,7 @@ function Card({ image, name }) {
 
 
     return (
-        <div className="card">
+        <div className="card" onClick={click}>
             <img src={image} alt="" />
             <h1>{name}</h1>
         </div>
