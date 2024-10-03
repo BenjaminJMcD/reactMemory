@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Card from './Card'
 
-export default function App() {
+function App() {
 
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -39,14 +39,17 @@ export default function App() {
 
   return (
     <div>
-      {items.map((item) => (
-        <Card 
-          image = {item.sprites.front_default}
-          name = {item.name}
-        />
-      ))}
+      <h1 className="pageTitle">Memory Card Game</h1>
+      <div className="cardContainer">
+        {items.map((item) => (
+          <Card
+            image = {item.sprites.front_default}
+            name = {item.name}
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
-
+export default App;

@@ -1,0 +1,19 @@
+
+.pageTitle {
+    text-align: center;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-rows: 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px;
+    text-align: center;
+    place-content: center;
+    margin-top: 80px;
+    gap: 10px;
+}
+
+.card {
+    border: 5px black solid;
+    border-radius: 10px;
+}
