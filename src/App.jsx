@@ -4,6 +4,7 @@ import Card from './Card'
 function App() {
 
   const [items, setItems] = useState([])
+  const [idArray, setIdArray] = useState([])
 
   useEffect(() => {
       const fetchData = async () => {
@@ -29,17 +30,24 @@ function App() {
 
           const combinedData = [data1, data2, data3, data4, data5, data6, data7, data8, data9];
           setItems(combinedData)
+
+          const setIds = [data1.id, data2.id, data3.id, data4.id, data5.id, data6.id, data7.id, data8.id, data9.id];
+          setIdArray(setIds);
+
       }
       fetchData();
-      return () => {
-      }
+
   }, []);
 
 
-  function handleClick() {
+  function handleClick(e) {
+    // NEED TO ACCESS NAME OR ID OF ITEM CLICKED -- RN, GIVING DIV, H1, OR IMG DEPENDING LOC
     const itemsToShuffle = [...items];
-    const shuffledItems = itemsToShuffle.sort((a, b) => 0.5 - Math.random());
+    const shuffledItems = itemsToShuffle.sort(() => 0.5 - Math.random());
     setItems(shuffledItems);
+    
+    console.log(e.target.getAttribute("data-key"))
+
   }
 
   return (
@@ -47,8 +55,9 @@ function App() {
       <h1 className="pageTitle">Memory Card Game</h1>
       <div className="cardContainer">
         {items.map((item) => (
-          <Card
+          <Card  
             key = {item.id}
+            id={item.id}
             image = {item.sprites.front_default}
             name = {item.name}
             click = {handleClick}
