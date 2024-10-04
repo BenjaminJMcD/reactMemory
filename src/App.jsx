@@ -4,7 +4,6 @@ import Card from './Card'
 function App() {
 
   const [items, setItems] = useState([])
-  const [idArray, setIdArray] = useState([])
   const [trackingArray, setTrackingArray] = useState([])
   const [score, setScore] = useState(0)
   const [highestScore, setHighestScore] = useState(0)
@@ -34,34 +33,27 @@ function App() {
           const combinedData = [data1, data2, data3, data4, data5, data6, data7, data8, data9];
           setItems(combinedData)
 
-          const setIds = [data1.id, data2.id, data3.id, data4.id, data5.id, data6.id, data7.id, data8.id, data9.id];
-          setIdArray(setIds);
-
-          if (trackingArray.length == 0) {
-            setTrackingArray(idArray)
-          }
-
       }
       fetchData();
 
   }, []);
 
 
-
-
   function handleTracking(id) {
 
     if (trackingArray.includes(Number(id))) {
+      if (score > highestScore) {
+        setHighestScore(score)
+      }
       setTrackingArray([])
       setScore(0)
-      console.log("ALREADY THERE")
     }
     else {
       setTrackingArray((prev) => [...prev, Number(id)])
       setScore(score+1)
-      console.log("FRESH CHOICE")
     }
   }
+
 
   function handleClick(e) {
 
@@ -70,16 +62,17 @@ function App() {
     setItems(shuffledItems);
     
     const targetId = e.target.getAttribute("data-key");
-    console.log(targetId)
 
     handleTracking(targetId)
 
   }
 
+
   return (
     <div>
       <h1 className="pageTitle">Memory Card Game</h1>
-      <h2>Score: {score}</h2>
+      <h3 className="score">Score: {score}</h3>
+      <h3 className="highestScore">Highest Score: {highestScore}</h3>
       <div className="cardContainer">
         {items.map((item) => (
           <Card  
